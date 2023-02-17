@@ -1,14 +1,31 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 /**
-*This program will assign a random number to the variable n each time it is executed.
-*The variable n will store a different value every time you will run this program.
-*/
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
+ */
 int main(void)
 {
-	int n;
+int n;
 
-	srand(time);
-	m = rand() - RAND_MAX/2;
-	return (0);
+srand(time(0));
+n = rand() - RAND_MAX / 2;
+
+/* Type code */
+
+if (n > 0)
+{
+printf("%d is positive\n", n);
+}
+if (n < 0)
+{
+printf("%d is negative\n", n);
+}
+if (n == 0)
+{
+printf("%d is zero\n", n);
+}
+return (0);
 }
