@@ -10,13 +10,11 @@ int main(void)
 
 	/* enter your code */
 
-	for (ch = 'x'; ch <= 'y'; ch++)
+	for (ch = 'a'; ch <= 'z'; ch++)
 	{
 		putchar(ch);
 	}
 	putchar('\n');
-
-	/* Execute program */
 
 	return (0);
 }
