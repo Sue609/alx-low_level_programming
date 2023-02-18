@@ -1,31 +1,28 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
+#include <stdlib.h>
 /**
- * main - Entry point
- *
- * Return: Always 0 (Success)
+ * main = Assign random number to variable n
+ * return:  always 0
  */
+
 int main(void)
 {
 int n;
-
 srand(time(0));
-n = rand() - RAND_MAX / 2;
 
-/* Type code */
+n = rand() - RAND_MAX/2;
 
 if (n > 0)
 {
-printf("%d is positive\n", n);
+printff("%d is positive\n", n);
+}
+if (n == 0)
+{printf("%d is zero\n", n);
 }
 if (n < 0)
 {
 printf("%d is negative\n", n);
-}
-if (n == 0)
-{
-printf("%d is zero\n", n);
 }
 return (0);
 }
