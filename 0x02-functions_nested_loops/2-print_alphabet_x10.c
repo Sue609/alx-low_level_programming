@@ -1,28 +1,29 @@
-include "main.h"
+#include "main.h"
+
 
 /**
- * main - check the code.
- *
- * Return: Always 0.
+ * print_alphabet_x10 - prints 10 times the alphabet, in lowercase,
+ * followed by a new line
  */
-
-
 void print_alphabet_x10(void)
-
-/* function that prints 10 times the alphabet, in lowercase */
-
 {
-int x = 0;
 char ch;
+int j;
 
-while (x <= 10)
+
+j = 0;
+
+
+while (j < 10)
 {
-while (ch <= 'a')
+ch = 'a';
+while (ch <= 'z')
 {
 _putchar(ch);
 ch++;
 }
 _putchar('\n');
-x++;
+j++;
 }
 }
+
