@@ -8,6 +8,13 @@ int *p;
 
 a[2] = 1024;
 p = &n;
+
+/**
+ * main - entry point
+ * Add one line of code
+ * Return: Always 0(success)
+ */
+
  /*
  * write your line of code here...
  * Remember:
@@ -16,10 +23,8 @@ p = &n;
  * - only one statement
  * - you are not allowed to code anything else than this line of code
  */
+*(p + 5) = 98;
 
-/* ...so that this prints 98\n */
-
-*(p + 5) = 98;;
 printf("a[2] = %d\n", a[2]);
 return (0);
 }
