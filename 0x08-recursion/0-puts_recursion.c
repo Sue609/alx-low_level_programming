@@ -5,14 +5,17 @@
  * @s: input
  * @char *s: a pointer to a character
  *
- * Return: 0 always success
+ * Return: 0 always
  */
-
 void _puts_recursion(char *s)
 {
 	if (*s)
 	{
-		_print_rev_recursion(s + 1);
 		_putchar(*s);
+		_puts_recursion(s + 1);
 	}
+
+	else
+		_putchar('\n');
 }
+
