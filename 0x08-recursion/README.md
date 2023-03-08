@@ -1,0 +1,2 @@
+Recursion - This is a programming technique where a function calls itself repeatedl until a certain condirion is met. It can be used to solve complex problems that can be broken down into smaller similar problems. 
+The process of recursion consists of two main steps: the base case and the recursive case. The base case is the condition in which the function stops calling itself and returns a value. The recursive case is where the function calls itself again with a smaller version of the problem until the base case is reached.
