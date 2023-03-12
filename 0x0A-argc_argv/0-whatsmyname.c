@@ -2,7 +2,7 @@
 #include "main.h"
 
 /**
- * name - prints name of arguements
+ * main - prints name of arguements
  *
  * @argc: no. of arguements.
  * @argv: array of arguement.
