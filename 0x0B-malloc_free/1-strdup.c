@@ -11,14 +11,20 @@
 
 char *_strdup(char *str)
 {
-char *str2;
-str2 = strdup(str);
+size_t len = strlen(str);
+char *dup = malloc(len + 1);
 
 if (str == NULL)
 {
 return (NULL);
 }
 
-return (str2);
+if (dup == NULL)
+{
+return (NULL);
+}
+memcpy(dup, str, len);
+
+return (dup);
 }
 
