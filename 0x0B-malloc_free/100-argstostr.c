@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -7,25 +6,19 @@
  * argstostr - concantinates all arguements.
  * @ac: accepts an integer.
  * @av: a pointer to another pointer.
- *
  * Return: pointer or NULL
  */
-
 char *argstostr(int ac, char **av)
 {
 	char *concat = NULL;
 	int i, j;
-	int len;
-	int pos;
-
-	len = 0;
-	pos = 0;
+	int len = 0;
+	int pos = 0;
 
 	if (ac == 0 || av == NULL)
 	{
 		return (NULL);
 	}
-
 	for (i = 0; i < ac; i++)
 	{
 		for (j = 0; av[i][j] != '\0'; j++)
@@ -35,13 +28,11 @@ char *argstostr(int ac, char **av)
 		}
 	}
 	len++;
-
 	concat = malloc(len * sizeof(char));
 	if (concat == NULL)
 	{
 		return (NULL);
 	}
-
 	for (i = 0; i < ac; i++)
 	{
 		for (j = 0; av[i][j] != '\0'; j++)
@@ -50,10 +41,8 @@ char *argstostr(int ac, char **av)
 			pos++;
 		}
 		concat[pos] = '\n';
-
 		pos++;
 	}
 	concat[pos] = '\0';
-
 	return (concat);
 }
