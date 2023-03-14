@@ -42,10 +42,10 @@ char **strtow(char *str)
 	int i, j, k, n;
 
 	if (str == NULL || *str == '\0')
-	{
 		return (NULL);
-	}
 	n = count_words(str);
+	if (n == 0)
+		return (NULL);
 	words = malloc((n + 1) * sizeof(char *));
 	if (words == NULL)
 		return (NULL);
