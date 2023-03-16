@@ -1,7 +1,9 @@
 #include "main.h"
 #include <stdlib.h>
 #include <string.h>
- /**_memset - fills memory with a constant byte
+
+/**
+ * _memset - fills memory with a constant byte
  * @s: memory area to be filled
  * @b: char to copy
  * @n: number of times to copy b
@@ -22,12 +24,13 @@ return (s);
 }
 
 /**
- * calloc - allocates memory from an array.
+ * _calloc - allocates memory from an array.
  * @nmemb: array.
  * @size: size in bytes.
  *
  * Return: NULL
  */
+
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
 	void *ptr;
