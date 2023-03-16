@@ -4,6 +4,12 @@
 #include "main.h"
 #include <ctype.h>
 
+/**
+ * main - beginning of the program.
+ * @argc: no. of arguements passed.
+ * @argv: a pointer
+ * Return: 0.
+ */
 int main(int argc, char *argv[])
 {
 	int num1, num2, mul1;
