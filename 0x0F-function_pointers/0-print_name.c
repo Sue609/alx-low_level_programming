@@ -4,7 +4,7 @@
 
 /**
  * print_name - prints name.
- * @char: name to be printed.
+ * @name: name to be printed.
  * @f: name of the pointer
  *
  * Return: nothing.
