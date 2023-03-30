@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 /**
- * print_lists - function that prints all the elements of a list.
+ * print_list - function that prints all the elements of a list.
  * @h: constant list .
  *
  * Return: no. of nodes.
