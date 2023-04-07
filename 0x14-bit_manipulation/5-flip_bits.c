@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdlib.h>
 
 /**
  * flip_bits - function that returns number of bits to flip to get from
@@ -16,8 +17,6 @@ unsigned int flip_bits(unsigned long int n, unsigned long int m)
 	int i;
 
 	bit = n ^ m;
-	if (bit == 0)
-		return (-1);
 
 	for (i = 0; i < 64; i++)
 	{
