@@ -13,22 +13,28 @@
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	FILE *fp;
+	int fp;
 	size_t n;
 	char buf[1024];
 
 	if (filename == NULL)
 		return (0);
-	fp = fopen(filename, "r");
-	if (fp == NULL)
+	fp = open(filename, O_RDONLY);
+	if (fp == -1)
 		return (0);
-	while ((n = fread(buf, 1, sizeof(buf), fp)) > 0 && letters > 0)
+
+	while ((n = read(fp, buf, sizeof(buf))) > 0 && letters > 0)
 	{
 		if (n > letters)
 			n = letters;
-		fwrite(buf, 1, n, stdout);
-		letters -= n;
+		if (write(STDOUT_FILENO, buf, n) == -1)
+		{
+			close(fp);
+			return (0);
+		}
+
+	letters -= n;
 	}
-	fclose(fp);
+	close(fp);
 	return (letters == 0 ? 1 : 0);
 }
