@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #define BUFFER_SIZE 1024
+#include <errno.h>
 /**
  * main - accepts arguements.
  * @argc: number of arguements it accepts.
