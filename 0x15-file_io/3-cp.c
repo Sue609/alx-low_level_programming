@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 	if (source == -1 || destination == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't open or create file(s).\n");
-		exit(98);
+		exit(99);
 	}
 	while ((ch = read(source, buffer, BUFFER_SIZE)) > 0)
 	{
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 	}
 	if (close(source) == -1 || close(destination) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", errno);
+		dprintf(STDERR_FILENO, "Error: Can't close file(s).\n");
 		exit(100);
 	}
 	return (0);
