@@ -24,10 +24,15 @@ int main(int argc, char *argv[])
 		exit(97);
 	}
 	source = open(argv[1], O_RDONLY);
-	destination = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, permissions);
-	if (source == -1 || destination == -1)
+	if (source == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't open or create file(s).\n");
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
+	}
+	destination = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, permissions);
+	if (destination == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		exit(99);
 	}
 	while ((ch = read(source, buffer, BUFFER_SIZE)) > 0)
