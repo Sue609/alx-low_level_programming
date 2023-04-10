@@ -12,13 +12,15 @@
  */
 int main(int argc, char *argv[])
 {
-	int source, destination, ch;
+	int source, destination;
+	ssize_t ch;
 	char buffer[BUFFER_SIZE];
+	mode_t permissions = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
 
 	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-		exit(98);
+		exit(97);
 	}
 	source = open(argv[1], O_RDONLY);
 	if (source == -1)
@@ -26,7 +28,7 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
-	destination = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	destination = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, permissions);
 	if (destination == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
