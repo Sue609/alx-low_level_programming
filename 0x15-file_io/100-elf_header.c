@@ -24,33 +24,61 @@ void print_entry(unsigned long e_entry);
  * Return: 0.
  */
 
-int main(int argc, char *argv[])
+int main(int __attribute__((__unused__)) argc, char *argv[])
 {
 	int fd;
 	char *buffer;
-	ssize_t ch;
+	ssize_t bytes_read;
 	Elf64_Ehdr *ehdr;
 
-	buffer = malloc(1024);
 	if (argc != 2)
 	{
-		fprintf(stderr, "Usage: elf_header elf_filename\n");
+		dprintf(STDERR_FILENO, "Usage: %s elf_filename\n", argv[0]);
 		exit(98);
 	}
 
 	fd = open(argv[1], O_RDONLY);
-
 	if (fd == -1)
 	{
-		fprintf(stderr, "Error opening file: %s\n", strerror(errno));
+		perror("Error opening file");
 		exit(98);
 	}
 
-	ch = read(fd, buffer, 1024);
-	if (ch == -1)
-		return (-1);
+	buffer = malloc(sizeof(Elf64_Ehdr));
+	if (buffer == NULL)
+	{
+		perror("Error allocating memory");
+		exit(98);
+	}
+
+	bytes_read = read(fd, buffer, sizeof(Elf64_Ehdr));
+
+	if (bytes_read < 0)
+	{
+		perror("Error reading file");
+		free(buffer);
+		close(fd);
+		exit(98);
+	}
+
+	if (bytes_read < (ssize_t) sizeof(Elf64_Ehdr))
+	{
+		fprintf(stderr, "Error: Could not read ELF header\n");
+		free(buffer);
+		close(fd);
+		exit(98);
+	}
 
 	ehdr = (Elf64_Ehdr *) buffer;
+	if (memcmp(ehdr->e_ident, ELFMAG, SELFMAG) != 0)
+	{
+		fprintf(stderr, "Error: %s is not an ELF file\n", argv[1]);
+		free(buffer);
+		close(fd);
+		exit(98);
+	}
+	
+	check_elf(ehdr->e_ident);
 	print_magic(ehdr->e_ident);
 	print_class(ehdr->e_ident);
 	print_data(ehdr->e_ident);
@@ -60,8 +88,8 @@ int main(int argc, char *argv[])
 	print_type(ehdr->e_type);
 	print_entry(ehdr->e_entry);
 
+	free(buffer);
 	close(fd);
-
 	return (0);
 }
 
@@ -72,23 +100,22 @@ int main(int argc, char *argv[])
  *
  * Return: nothing.
  */
+
 void check_elf(unsigned char *e_ident)
 {
-	if (e_ident[EI_MAG0] != ELFMAG0 ||
-			e_ident[EI_MAG1] != ELFMAG1 ||
-			e_ident[EI_MAG2] != ELFMAG2 ||
-			e_ident[EI_MAG3] != ELFMAG3)
-	{
-		dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
-		exit(98);
-	}
+	int index;
 
-	if (e_ident[EI_CLASS] != ELFCLASS64)
+	for (index = 0; index < 4; index++)
 	{
-		dprintf(STDERR_FILENO, "Error: Not a 64-bit ELF file\n");
-		exit(98);
+		if (e_ident[index] != 127 &&
+		    e_ident[index] != 'E' &&
+		    e_ident[index] != 'L' &&
+		    e_ident[index] != 'F')
+		{
+			dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
+			exit(98);
+		}
 	}
-
 }
 
 /**
@@ -143,11 +170,11 @@ void print_data(unsigned char *e_ident)
 	switch (e_ident[EI_DATA])
 	{
 		case ELFDATA2LSB:
-			printf("Little endian\n");
+			printf("2's complement, little endian\n");
 			break;
 
 		case ELFDATA2MSB:
-			printf("Big endian\n");
+			printf("2's complement, big endian\n");
 			break;
 
 		default:
