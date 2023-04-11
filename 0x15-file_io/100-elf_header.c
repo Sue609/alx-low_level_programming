@@ -77,7 +77,7 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 		close(fd);
 		exit(98);
 	}
-	
+
 	check_elf(ehdr->e_ident);
 	print_magic(ehdr->e_ident);
 	print_class(ehdr->e_ident);
@@ -96,7 +96,7 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 
 /**
  * check_elf - checks the elf.
- * @e_indent: unsigned character pointer.
+ * @e_ident: unsigned character pointer.
  *
  * Return: nothing.
  */
@@ -127,22 +127,22 @@ void check_elf(unsigned char *e_ident)
 void print_magic(unsigned char *e_ident)
 {
 	int i;
+	
+	printf("Magic:\t\t\t\t\t");
+	for (i = 0; i < EI_NIDENT; i++)
+		printf("%02x ", e_ident[i]);
 
-        printf("Magic:   ");
-        for (i = 0; i < EI_NIDENT; i++)
-                printf("%02x ", e_ident[i]);
-
-        printf("\n");
+	printf("\n");
 }
 /**
  * print_class - prints the class.
- * @e_indent: unsigned character pointer.
+ * @e_ident: unsigned character pointer.
  *
  * Return: nothing.
  */
 void print_class(unsigned char *e_ident)
 {
-	printf("Class:     ");
+	printf("Class:\t\t\t\t\t");
 
 	if (e_ident[EI_CLASS] == ELFCLASSNONE)
 		printf("none\n");
@@ -159,13 +159,13 @@ void print_class(unsigned char *e_ident)
 
 /**
  * print_data - prints data.
- * @e_indent: unsigned character pointer.
+ * @e_ident: unsigned character pointer.
  *
  * Return: nothing.
  */
 void print_data(unsigned char *e_ident)
 {
-	printf("Data:   ");
+	printf("Data:\t\t\t\t\t");
 
 	switch (e_ident[EI_DATA])
 	{
@@ -192,7 +192,7 @@ void print_data(unsigned char *e_ident)
  */
 void print_version(unsigned char *e_ident)
 {
-	printf("Version:  ");
+	printf("Version:\t\t\t\t\t");
 
 	switch (e_ident[EI_VERSION])
 	{
@@ -219,7 +219,7 @@ void print_version(unsigned char *e_ident)
  */
 void print_osabi(unsigned char *e_ident)
 {
-	printf("OS/ABI:  ");
+	printf("OS/ABI:\t\t\t\t\t");
 	switch (e_ident[EI_OSABI])
 	{
 		case ELFOSABI_SYSV:
@@ -279,7 +279,7 @@ void print_osabi(unsigned char *e_ident)
 
 void print_abiversion(unsigned char *e_ident)
 {
-	printf("ABI Version:   ");
+	printf("ABI Version:\t\t\t\t\t");
 	switch (e_ident[EI_ABIVERSION])
 	{
 		case 0:
@@ -302,7 +302,7 @@ void print_abiversion(unsigned char *e_ident)
  */
 void print_type(unsigned int e_type)
 {
-	printf("Type:    ");
+	printf("Type:\t\t\t\t\t");
 	switch (e_type)
 	{
 		case ET_NONE:
