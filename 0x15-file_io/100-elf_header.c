@@ -280,18 +280,9 @@ void print_osabi(unsigned char *e_ident)
 
 void print_abiversion(unsigned char *e_ident)
 {
-	printf("ABI Version:\t\t\t\t\t");
-	switch (e_ident[EI_ABIVERSION])
-	{
-		case 0:
-			printf("%d (0)\n", e_ident[EI_ABIVERSION]);
-			break;
+	printf("ABI Version:\t\t\t\t\t%d\n", e_ident[EI_ABIVERSION]);
 
-			default:
-			printf("%d\n", e_ident[EI_ABIVERSION]);
 
-			break;
-	}
 }
 
 
