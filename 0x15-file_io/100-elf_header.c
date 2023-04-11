@@ -77,6 +77,7 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 		close(fd);
 		exit(98);
 	}
+	printf("ELF Header: \n");
 
 	check_elf(ehdr->e_ident);
 	print_magic(ehdr->e_ident);
