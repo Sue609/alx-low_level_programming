@@ -15,24 +15,8 @@
 
 unsigned long int key_index(const unsigned char *key, unsigned long int size)
 {
-	unsigned long int hash_value, index;
+	unsigned long int hash_value;
 
-	if (key == NULL)
-		return (0);
-
-	if (isdigit(*key))
-	{
-		char str[20];
-		sprintf(str, "%lu", atol((char *)key));
-		hash_value = hash_djb2((unsigned char *)str);
-	}
-
-	else
-	{
-		hash_value = hash_djb2(key);
-	}
-
-	index = hash_value % size;
-
-	return (index);
+	hash_value = hash_djb2(key);
+	return (hash_value % size);
 }
