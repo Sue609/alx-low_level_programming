@@ -26,18 +26,9 @@ char *hash_table_get(const hash_table_t *ht, const char *key)
 	{
 		if (strcmp(node->key, key) == 0)
 			return (node->value);
-		
 		node = node->next;
 	}
 
 	return (NULL);
 }
 
-
-
-int is_float(const char *str)
-{
-    char *endptr;
-    strtod(str, &endptr);
-    return *endptr == '\0';
-}
