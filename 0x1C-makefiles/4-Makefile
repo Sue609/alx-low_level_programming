@@ -1,20 +1,12 @@
-COMPILER := gcc
-CFLAGS := -Wall -Werror -Wextra -pedantic
-RM := rm -f
+CC = gcc
+SRC = main.c school.c
+OBJ = $(SRC:.c=.o)
+NAME = school
+RM = rm -f
+CFLAGS = -Wall -Werror -Wextra -pedantic
 
-SRC := main.c school.c
-OBJ := $(SRC:.c=.o)
-
-NAME := school
-
-.PHONY: all clean oclean fclean re
-all: $(NAME)
-
-$(NAME): $(OBJ)
-$(COMPILER) $(CFLAGS) $(OBJ) -o $(NAME)
-
-%.o: %.c
-	$(COMPILER) $(CFLAGS) -c $< -o $@
+all: $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
 
 clean:
 	$(RM) *~ $(NAME)
@@ -23,4 +15,5 @@ oclean:
 	$(RM) $(OBJ)
 
 fclean: clean oclean
+
 re: fclean all
